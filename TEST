@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planilha - Temporada 2023</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: center;
+        }
+        form input[type="text"] {
+            width: 100px;
+        }
+        form input[type="submit"] {
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+
+<form id="formulario">
+    <input type="text" id="casa" name="casa" placeholder="Casa">
+    <input type="text" id="placarCasa" name="placarCasa" placeholder="Placar Casa">
+    <input type="text" id="placarVisitante" name="placarVisitante" placeholder="Placar Visitante">
+    <input type="text" id="visitante" name="visitante" placeholder="Visitante">
+    <input type="submit" value="Adicionar">
+</form>
+
+<table id="planilha">
+    <caption>Baiano - Temporada 2023</caption>
+    <tr>
+        <th>Casa</th>
+        <th>Placar Casa</th>
+        <th>Placar Visitante</th>
+        <th>Visitante</th>
+    </tr>
+</table>
+
+<script>
+    // Função para adicionar um novo resultado à planilha
+    function adicionarResultado(event) {
+        event.preventDefault(); // Impede o recarregamento da página
+        var casa = document.getElementById("casa").value;
+        var placarCasa = document.getElementById("placarCasa").value;
+        var placarVisitante = document.getElementById("placarVisitante").value;
+        var visitante = document.getElementById("visitante").value;
+
+        // Verifica se todos os campos estão preenchidos
+        if (casa && placarCasa && placarVisitante && visitante) {
+            var tabela = document.getElementById("planilha");
+            var tr = document.createElement("tr");
+            tr.innerHTML = `<td>${casa}</td><td>${placarCasa}</td><td>${placarVisitante}</td><td>${visitante}</td>`;
+            tabela.appendChild(tr);
+
+            // Limpa os campos do formulário após adicionar o resultado
+            document.getElementById("formulario").reset();
+        } else {
+            alert("Por favor, preencha todos os campos.");
+        }
+    }
+
+    // Adiciona um ouvinte de evento para o formulário
+    document.getElementById("formulario").addEventListener("submit", adicionarResultado);
+</script>
+
+</body>
+</html>
